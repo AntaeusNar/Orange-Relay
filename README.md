@@ -21,8 +21,6 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
    - This will install the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) library
 6. ```pip install Django```
    - Installs [Django](https://www.djangoproject.com/) framework
-7. ```pip install django-bootstrap4```
-   - Installs [Bootstrap 4](https://django-bootstrap4.readthedocs.io/en/latest/)
 8. Setup the Django project
    - ```django-admin startproject OR_web . ```
       - Starts the project
@@ -30,18 +28,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
    ```python
    # My Apps
    'OR_web_GUI',
-   
-   # Third Party Apps
-   'bootstrap4',
-   ``` 
-   - Add below to _settings.py_ at end
-   ```python
-          # Settings for django-bootstrap4
-       
-          BOOTSTRAP4 = {
-            'include_jquery' : True,
-          }
-   ```
+    ```
 9. Setup the Django database (default is sqlite)
    - Run in terminal ```python manage.py migrate```
    - **NOTE: Any changes to models in _models.py_ will change the way the database works.  Please use the following instructions after every change:**
