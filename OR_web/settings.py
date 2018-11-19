@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # My Apps
-    'OR_web',
+    'OR_web_GUI',
 
     # Third Party Apps
     'bootstrap4',

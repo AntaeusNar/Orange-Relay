@@ -29,7 +29,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
    - Add below to to _settings.py_ under INSTALLED_APPS
    ```python
    # My Apps
-   'OR_web',
+   'OR_web_GUI',
    
    # Third Party Apps
    'bootstrap4',
