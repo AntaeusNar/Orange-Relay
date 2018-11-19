@@ -42,7 +42,6 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
             'include_jquery' : True,
           }
    ```
-9. ```cd OR_web```
 9. Setup the Django database (default is sqlite)
    - Run in terminal ```python manage.py migrate```
    - **NOTE: Any changes to models in _models.py_ will change the way the database works.  Please use the following instructions after every change:**
