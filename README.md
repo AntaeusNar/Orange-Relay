@@ -7,7 +7,7 @@ Using the [OrangePi.GPIO](https://github.com/Jeremie-C/OrangePi.GPIO) python lib
 
 ## Setup the PyCharm environment
 
-###Windows:
+### Windows:
 
 1. Install [Python](https://www.python.org/downloads/)
    - Make sure to install pip and PATH as part of the installation of python
