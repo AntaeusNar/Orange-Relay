@@ -37,6 +37,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
    - Add below to _settings.py_ at end
    ```python
           # Settings for django-bootstrap4
+       
           BOOTSTRAP4 = {
             'include_jquery' : True,
           }
