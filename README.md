@@ -11,6 +11,8 @@ Using the [OrangePi.GPIO](https://github.com/Jeremie-C/OrangePi.GPIO) python lib
 
 1. Install [Python](https://www.python.org/downloads/)
    - Make sure to install pip and PATH as part of the installation of python
+2. Install [Visual C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+   - Needed to compile [OrangePi.GPIO](https://github.com/Jeremie-C/OrangePi.GPIO) library
 2. ```pip install --user virtualenv```
    - This will install [virtualenv](https://virtualenv.pypa.io/en/latest/)
 3. ```python -m venv OR_env```
