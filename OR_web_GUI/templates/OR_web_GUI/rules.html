@@ -1,0 +1,12 @@
+{% extends 'OR_web_GUI/base.html' %}
+
+{% block content %}
+
+<p>Rules</p>
+
+<ul>
+    {% for rule in rules %}
+        <li>{{ rule }}</li>
+    {% empty %}
+        <li>No Rules have been created</li>
+</ul>
