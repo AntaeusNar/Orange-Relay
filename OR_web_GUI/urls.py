@@ -10,4 +10,5 @@ urlpatterns = [
     # Home page
     path('', views.index, name='index'),
     path('rules/', views.rules, name='rules'),
+    path('inputs/', views.inputs, name='inputs'),
 ]
