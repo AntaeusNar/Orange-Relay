@@ -32,7 +32,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
 9. Setup the Django database (default is sqlite)
    - Run in terminal ```python manage.py migrate```
    - **NOTE: Any changes to models in _models.py_ will change the way the database works.  Please use the following instructions after every change:**
-     - In the terminal ```python manage.py makemigrations OR_web```
+     - In the terminal ```python manage.py makemigrations OR_web_GUI```
      - In the terminal ```python manage.py migrate```
 10. ```python manage.py startapp OR_web_GUI```
 10. Start the Django server with ```python manage.py runserver```
