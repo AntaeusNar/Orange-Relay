@@ -17,7 +17,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
    - This will create the virtual environment
 4. ```OR_env\Scripts\activate```
    - This will activate the virtual environment
-5. ```pip install OrangePi.GPIO```
+5. ```pip install OPi.GPIO```
    - This will install the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) library
 6. ```pip install Django```
    - Installs [Django](https://www.djangoproject.com/) framework
