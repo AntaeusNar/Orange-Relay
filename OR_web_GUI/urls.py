@@ -11,4 +11,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('rules/', views.rules, name='rules'),
     path('inputs/', views.inputs, name='inputs'),
+    path('outputs/', views.outputs, name='outputs'),
 ]

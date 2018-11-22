@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Rule, Input
+from .models import Rule, Input, Output
 
 # Create your views here.
 
@@ -21,3 +21,12 @@ def inputs(request):
     inputs = Input.objects.order_by('date_added')
     context = {'inputs': inputs}
     return render(request, 'OR_web_GUI/inputs.html', context)
+
+
+def outputs(request):
+    """shows those outputs"""
+    outputs = Output.objects.order_by('date_added')
+    context = {'outputs': outputs}
+    return render(request, 'OR_web_GUI/outputs.html', context)
+
+

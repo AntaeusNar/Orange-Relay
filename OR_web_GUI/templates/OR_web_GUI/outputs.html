@@ -1,0 +1,15 @@
+{% extends 'OR_web_GUI/base.html' %}
+
+{% block content %}
+
+<p>Outputs</p>
+
+<ul>
+    {% for output in outputs %}
+        <li>{{ output }}</li>
+    {% empty %}
+        <li>No outputs have been created</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
