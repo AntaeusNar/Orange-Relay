@@ -6,7 +6,9 @@ from .models import Rule, Input, Output
 
 def index(request):
     """The home page for OR_web_GUI"""
-    return render(request, 'OR_web_GUI/index.html')
+    inputs = Input.objects.exclude(rule__text=None)
+    context = {'inputs': inputs}
+    return render(request, 'OR_web_GUI/index.html', context)
 
 
 def rules(request):
