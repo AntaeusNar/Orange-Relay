@@ -7,7 +7,8 @@ from .models import Rule, Input, Output
 def index(request):
     """The home page for OR_web_GUI"""
     inputs = Input.objects.exclude(rule__text=None)
-    context = {'inputs': inputs}
+    outputs = Output.objects.exclude(rule__text=None)
+    context = {'inputs': inputs, 'outputs' : outputs}
     return render(request, 'OR_web_GUI/index.html', context)
 
 
