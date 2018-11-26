@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 import OPi.GPIO as GPIO
 from .models import Rule, Input, Output
 
@@ -48,4 +48,5 @@ def relay_control(request, output_id):
     GPIO.setup(output.channel, GPIO.OUT)
     """toggles the current"""
     GPIO.output(output.channel, not GPIO.input(output.channel))
-    return HttpResponse('')
+    """should return back to previous page"""
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
