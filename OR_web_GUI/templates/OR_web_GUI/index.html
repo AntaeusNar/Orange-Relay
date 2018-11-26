@@ -2,8 +2,18 @@
 {% load static %}
 
 {% block content %}
-<p>This is a test</p>
-<img src="{% static 'OR_web_GUI/git.png' %}" alt="My image">
+<h3>Inputs</h3>
+{% for input in inputs %}
+    <li>{{ input }}</li>
+{% empty %}
+    <li>No Inputs used in rules.</li>
+{% endfor %}
+<h3>Outputs</h3>
+{% for output in outputs %}
+    <li>{{ output }}</li>
+{% empty %}
+    <li>No Outputs used in rules.</li>
+{% endfor %}
 {% endblock content %}
 
 

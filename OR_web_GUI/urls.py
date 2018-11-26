@@ -8,5 +8,8 @@ app_name = 'OR_web_GUI'
 
 urlpatterns = [
     # Home page
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('rules/', views.rules, name='rules'),
+    path('inputs/', views.inputs, name='inputs'),
+    path('outputs/', views.outputs, name='outputs'),
 ]

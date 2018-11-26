@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Inputs(models.Model):
+class Input(models.Model):
     """Inputs from anything"""
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -14,7 +14,7 @@ class Inputs(models.Model):
         return self.text
 
 
-class Outputs(models.Model):
+class Output(models.Model):
     """outputs to pins/relays"""
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -27,8 +27,8 @@ class Outputs(models.Model):
 
 class Rule(models.Model):
     """what when what"""
-    input = models.ForeignKey(Inputs)
-    output = models.ForeignKey(Outputs)
+    input = models.ForeignKey(Input, on_delete=models.CASCADE)
+    output = models.ForeignKey(Output, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     last_used = models.DateTimeField()

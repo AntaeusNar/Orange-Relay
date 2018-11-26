@@ -1,0 +1,15 @@
+{% extends 'OR_web_GUI/base.html' %}
+
+{% block content %}
+
+<p>Inputs</p>
+
+<ul>
+    {% for input in inputs %}
+        <li>{{ input }}</li>
+    {% empty %}
+        <li>No inputs have been created</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
