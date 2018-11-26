@@ -19,6 +19,7 @@ class Output(models.Model):
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     last_used = models.DateTimeField()
+    channel = models.IntegerField()
 
     def __str__(self):
         """return a string representation of the model."""

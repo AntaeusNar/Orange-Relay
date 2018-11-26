@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+import OPi.GPIO as GPIO
 from .models import Rule, Input, Output
 
 # Create your views here.
 
+# Visual/GUI views
 
 def index(request):
     """The home page for OR_web_GUI"""
@@ -33,3 +36,16 @@ def outputs(request):
     return render(request, 'OR_web_GUI/outputs.html', context)
 
 
+#  action views: basically there is no real reason hitting a url NEEDS to return a webpage, that just what we do when
+#  we let people use it, but we can have the 'view' do other things, like activate gpio pins
+
+
+def relay_control(request, output_id):
+    """will grab the output sent to it and change the state of said output"""
+    output = Output.objects.get(id=output_id)
+    """sets up the PIN"""
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(output.channel, GPIO.OUT)
+    """toggles the current"""
+    GPIO.output(output.channel, not GPIO.input(output.channel))
+    return HttpResponse('')
