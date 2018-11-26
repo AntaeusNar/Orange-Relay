@@ -36,3 +36,8 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
      - In the terminal ```python manage.py migrate```
 10. ```python manage.py startapp OR_web_GUI```
 10. Start the Django server with ```python manage.py runserver```
+
+## Git Workflow/Branch control:
+
+Following some of the framework laid out in [Vincent Driessen's Article](https://nvie.com/posts/a-successful-git-branching-model/) this repo will use master as full release and autodeployment ready code, with development being the primary working/nightly build branch.  Hotfixes, bugfixes and new feature dev should each occur on their own branch then merged without fastforward into development or in the case of hotfixes, master. 
+![](https://nvie.com/img/git-model@2x.png "Article Example")
