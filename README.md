@@ -41,3 +41,7 @@ Using the [OPi.GPIO](https://opi-gpio.readthedocs.io/en/latest/) python library 
 
 Following some of the framework laid out in [Vincent Driessen's Article](https://nvie.com/posts/a-successful-git-branching-model/) this repo will use master as full release and autodeployment ready code, with development being the primary working/nightly build branch.  Hotfixes, bugfixes and new feature dev should each occur on their own branch then merged without fastforward into development or in the case of hotfixes, master. 
 ![](https://nvie.com/img/git-model@2x.png "Article Example")
+
+## Release names:
+
+For simplicity and ease of use each release will be version numbered and then titled after [The Muppets](http://muppet.wikia.com/wiki/Sesame_Street_character_debuts)
