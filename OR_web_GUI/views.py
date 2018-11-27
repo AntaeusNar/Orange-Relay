@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Rule, Input, Output
 
-"""This is commented out as windows doesn't have select.epollin, select.epollet and select.epollpri.
-One idea would be to add code for dev that detected if running in a windows env would fake the GPIO library
-Or just move all dev to linux and see if it works there"""
-#  import OPi.GPIO as GPIO
+"""In order to get around not have select.epoll in a windows environment we are implementing
+Fake.RPi.GPIO which emulates the existence of the GPIO"""
+try:
+    import OPi.GPIO as GPIO
+except ImportError:
+    import FakeRPi.GPIO as GPIO
 
 # Create your views here.
 
