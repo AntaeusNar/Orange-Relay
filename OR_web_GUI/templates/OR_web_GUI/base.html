@@ -10,6 +10,10 @@
     <a href="{% url 'OR_web_GUI:outputs' %}">Outputs</a>
 </head>
 <body>
+    {% if fake %}
+<div title="If you're reading this, you've been in a coma for almost 20 years. We're trying a new technique. We don't know where this message will end up in your dream, but we hope we're getting through.
+ Please wake up. We miss you."><h1>Hover here</h1></div>
+    {% endif %}
     {% block content %}{% endblock content %}
 
 </body>

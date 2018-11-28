@@ -6,39 +6,43 @@ from .models import Rule, Input, Output
 Fake.RPi.GPIO which emulates the existence of the GPIO"""
 try:
     import OPi.GPIO as GPIO
+    fake = False
 except ImportError:
     import FakeRPi.GPIO as GPIO
+    fake = True
+    print('The linux_interaction() function was not executed')
 
 # Create your views here.
 
 # Visual/GUI views
 
+
 def index(request):
     """The home page for OR_web_GUI"""
     inputs = Input.objects.exclude(rule__text=None)
     outputs = Output.objects.exclude(rule__text=None)
-    context = {'inputs': inputs, 'outputs' : outputs}
+    context = {'inputs': inputs, 'outputs': outputs, 'fake': fake}
     return render(request, 'OR_web_GUI/index.html', context)
 
 
 def rules(request):
     """Shows the rules"""
     rules = Rule.objects.order_by('date_added')
-    context = {'rules': rules}
+    context = {'rules': rules, 'fake': fake}
     return render(request, 'OR_web_GUI/rules.html', context)
 
 
 def inputs(request):
     """shows the inputs"""
     inputs = Input.objects.order_by('date_added')
-    context = {'inputs': inputs}
+    context = {'inputs': inputs, 'fake': fake}
     return render(request, 'OR_web_GUI/inputs.html', context)
 
 
 def outputs(request):
     """shows those outputs"""
     outputs = Output.objects.order_by('date_added')
-    context = {'outputs': outputs}
+    context = {'outputs': outputs, 'fake': fake}
     return render(request, 'OR_web_GUI/outputs.html', context)
 
 
