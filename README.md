@@ -45,3 +45,9 @@ Following some of the framework laid out in [Vincent Driessen's Article](https:/
 ## Release names:
 
 For simplicity and ease of use each release will be version numbered and then titled after [The Muppets](http://muppet.wikia.com/wiki/Sesame_Street_character_debuts)
+
+
+## Compatibility for dev
+
+For the moment, because of the differences in windows vs linux select system calls we are importing [FakeRPi](https://github.com/sn4k3/FakeRPi)
+as GPIO on ORi.GPIO load failure.
