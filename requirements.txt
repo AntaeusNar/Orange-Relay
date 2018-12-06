@@ -1,0 +1,4 @@
+Django==2.1.3
+fake-rpi==0.1
+OPi.GPIO==0.3.5
+pytz==2018.7
