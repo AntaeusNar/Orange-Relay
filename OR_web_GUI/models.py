@@ -23,7 +23,7 @@ class Output(models.Model):
 
     def __str__(self):
         """return a string representation of the model."""
-        return self.text
+        return self.text+" channel: "+str(self.channel)
 
 
 class Rule(models.Model):

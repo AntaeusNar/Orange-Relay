@@ -46,17 +46,33 @@ def outputs(request):
     return render(request, 'OR_web_GUI/outputs.html', context)
 
 
-#  action views: basically there is no real reason hitting a url NEEDS to return a webpage, that just what we do when
+#  action views: basically there is no real reason hitting a url NEEDS to return a web page, that just what we do when
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins
 
 
 def relay_control(request, output_id):
+    # Right now this code 'should' work, however what it really does is check for failing sytanx as all fake GPIO
+    # reports as LOW kind of no matter what we do...only testing on a Pi will work.  Otherwise it simply flips the
+    # current state and then calls the status request view
     """will grab the output sent to it and change the state of said output"""
     output = Output.objects.get(id=output_id)
     """sets up the PIN"""
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(output.channel, GPIO.OUT)
-    """toggles the current"""
+    """toggles the current state"""
     GPIO.output(output.channel, not GPIO.input(output.channel))
+    GPIO.output(output.channel, GPIO.HIGH)
     """should return back to previous page"""
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/relaystatus/'+str(output_id)))
+
+
+def relay_state(request, output_id):
+    """will grab the output sent to it and return the state of said output"""
+    output = Output.objects.get(id=output_id)
+    state = GPIO.input(output.channel)
+    if state:
+        return render(request, 'OR_web_GUI/outputStateGreen.html')
+    elif not state:
+        return render(request, 'OR_web_GUI/outputStateRed.html')
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
