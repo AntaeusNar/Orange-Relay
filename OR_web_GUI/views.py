@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import Rule, Input, Output
 
 """In order to get around not have select.epoll in a windows environment we are implementing
-Fake.RPi.GPIO which emulates the existence of the GPIO"""
+FakeRPi.GPIO which emulates the existence of the GPIO"""
 try:
     import OPi.GPIO as GPIO
     fake = False
