@@ -5,10 +5,8 @@
 # The basic idea is that when a pin is made HIGH or LOW it is writen into a file,
 # and then when the input is checked it reads the file.......
 
-import json
 from FakeRPi.GPIO import *
-
-
+from . import extendJSON as json
 
 
 def output(channel, state):

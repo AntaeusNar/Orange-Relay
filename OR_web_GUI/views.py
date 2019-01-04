@@ -9,7 +9,7 @@ try:
     fake = False
 except ImportError:
     # import FakeRPi.GPIO as GPIO
-    import OR_GPIO_Override.GPIO as GPIO
+    from . import extendGPIO as GPIO
     fake = True
     print('The linux_interaction() function was not executed')
 
@@ -58,8 +58,8 @@ def relay_control(request, output_id):
     """will grab the output sent to it and change the state of said output"""
     output = Output.objects.get(id=output_id)
     """sets up the PIN"""
-    # GPIO.setmode(GPIO.BOARD)
-    # GPIO.setup(output.channel, GPIO.OUT)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(output.channel, GPIO.OUT)
     """toggles the current state"""
     GPIO.output(output.channel, not GPIO.input(output.channel))
     """should return back to previous page"""
