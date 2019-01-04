@@ -31,3 +31,25 @@ def output(channel, state):
     JSON.writeJSONfile('pins.json', pins)
 
     return state
+
+
+def input(channel):
+    """
+    To read the value of a GPIO pin:
+    :param channel:
+    :return:
+    """
+
+    # Should try to open the json file containing the pin dict
+    try:
+        pins = JSON.getJSONfile('pins.json')
+        pins = {int(k): v for k, v in pins.items()}
+    except EnvironmentError:
+        pins = {}
+
+    if channel not in pins:
+        return LOW
+    else:
+        state = pins[channel]
+
+    return state
