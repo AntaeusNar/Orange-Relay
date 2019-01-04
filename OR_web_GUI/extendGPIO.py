@@ -18,11 +18,15 @@ def output(channel, state):
 
     # should try to open the json file containing the pin dict with error handling options
     try:
-        JSON.getJSONfile('pins.json')
+        pins = JSON.getJSONfile('pins.json')
+        pins = {int(k): v for k, v in pins.items()}
     except EnvironmentError:
         pins = {}
 
-    pins[channel] = state
+    if channel not in pins:
+        pins[channel] = state
+    else:
+        pins[channel] = state
 
     JSON.writeJSONfile('pins.json', pins)
 
