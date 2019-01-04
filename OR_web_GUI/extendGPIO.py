@@ -6,7 +6,7 @@
 # and then when the input is checked it reads the file.......
 
 from FakeRPi.GPIO import *
-from . import extendJSON as json
+from . import extendJSON as JSON
 
 
 def output(channel, state):
@@ -18,16 +18,12 @@ def output(channel, state):
 
     # should try to open the json file containing the pin dict with error handling options
     try:
-        with open('pins.json', 'r') as json_file:
-            pins = json.load(json_file)
-            json_file.close()
+        JSON.getJSONfile('pins.json')
     except EnvironmentError:
         pins = {}
 
     pins[channel] = state
 
-    with open('pins.json', 'w') as json_file:
-        json.dump(pins, json_file)
-    json_file.close()
+    JSON.writeJSONfile('pins.json', pins)
 
     return state
