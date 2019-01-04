@@ -19,19 +19,17 @@ def output(channel, state):
     """
 
     # should try to open the json file containing the pin dict with error handling options
-    with open('pins.json', 'r') as (json_file, err):
-        if err:
-            pins = {}
-        else:
+    try:
+        with open('pins.json', 'r') as json_file:
             pins = json.load(json_file)
+            json_file.close()
+    except EnvironmentError:
+        pins = {}
 
-    if channel in pins:
-        pins[channel] = state
-    else:
-        pins[channel] = state
+    pins[channel] = state
 
     with open('pins.json', 'w') as json_file:
         json.dump(pins, json_file)
     json_file.close()
-    print('did this run')
+
     return state

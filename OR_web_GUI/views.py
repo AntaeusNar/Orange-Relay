@@ -58,11 +58,10 @@ def relay_control(request, output_id):
     """will grab the output sent to it and change the state of said output"""
     output = Output.objects.get(id=output_id)
     """sets up the PIN"""
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(output.channel, GPIO.OUT)
+    # GPIO.setmode(GPIO.BOARD)
+    # GPIO.setup(output.channel, GPIO.OUT)
     """toggles the current state"""
     GPIO.output(output.channel, not GPIO.input(output.channel))
-    GPIO.output(output.channel, GPIO.HIGH)
     """should return back to previous page"""
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/relaystatus/'+str(output_id)))
 
