@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 from .models import Rule, Input, Output
+from .forms import OutputForm
+
 
 """In order to get around not have select.epoll in a windows environment we are implementing
 FakeRPi.GPIO which emulates the existence of the GPIO"""
@@ -15,7 +20,7 @@ except ImportError:
 
 # Create your views here.
 
-# Visual/GUI views
+# base views
 
 
 def index(request):
@@ -48,6 +53,22 @@ def outputs(request):
     context = {'outputs': outputs, 'fake': fake}
     return render(request, 'OR_web_GUI/outputs.html', context)
 
+# Configuration views
+
+
+def new_output(request):
+    """adds new output"""
+    if request.method != 'POST':
+        # no date submitted; create a blank form
+        form = OutputForm()
+    else:
+        # POST data submitted; process data.
+        form = OutputForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('OR_web_GUI:outputs'))
+    context = {'form': form}
+    return render(request, 'OR_web_GUI/new_output.html', context)
 
 #  action views: basically there is no real reason hitting a url NEEDS to return a web page, that just what we do when
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins

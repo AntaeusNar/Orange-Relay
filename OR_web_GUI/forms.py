@@ -1,10 +1,10 @@
 from django import forms
 
-from .models import output
+from .models import Output
 
 
 class OutputForm(forms.ModelForm):
     class Meta:
-        model = output
-        fields = ['text', 'int']
-        labels = {'text': '', 'int': ''}
+        model = Output
+        fields = ['text', 'channel']
+        labels = {'text': 'Description of Output', 'channel': 'Channel Number'}
