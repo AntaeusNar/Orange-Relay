@@ -43,6 +43,8 @@ def inputs(request):
 def outputs(request):
     """shows those outputs"""
     outputs = Output.objects.order_by('date_added')
+    for output in outputs:
+        output.state = GPIO.input(output.channel)
     context = {'outputs': outputs, 'fake': fake}
     return render(request, 'OR_web_GUI/outputs.html', context)
 
@@ -51,7 +53,7 @@ def outputs(request):
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins
 
 
-def relay_control(request, output_id):
+def relay_toggle(request, output_id):
     # Right now this code 'should' work, however what it really does is check for failing sytanx as all fake GPIO
     # reports as LOW kind of no matter what we do...only testing on a Pi will work.  Otherwise it simply flips the
     # current state and then calls the status request view
@@ -63,7 +65,7 @@ def relay_control(request, output_id):
     """toggles the current state"""
     GPIO.output(output.channel, not GPIO.input(output.channel))
     """should return back to previous page"""
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/relaystatus/'+str(output_id)))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def relay_state(request, output_id):

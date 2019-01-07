@@ -14,7 +14,7 @@ urlpatterns = [
     path('rules/', views.rules, name='rules'),
     path('inputs/', views.inputs, name='inputs'),
     path('outputs/', views.outputs, name='outputs'),
-    path('relayswitch/<int:output_id>/', views.relay_control, name='relay_control'),
+    path('relay_toggle/<int:output_id>/', views.relay_toggle, name='relay_toggle'),
     path('relaystatus/<int:output_id>/', views.relay_state, name='relay_state'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('OR_web_GUI/img/favicon.ico'), permanent=False), name='favicon'),
 ]

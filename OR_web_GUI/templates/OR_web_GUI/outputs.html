@@ -2,11 +2,15 @@
 
 {% block content %}
 
-<p>Outputs</p>
+<p>Outputs - (green is HIGH, red is LOW)</p>
 
 <ul>
     {% for output in outputs %}
-        <li>{{ output }}</li>
+        {% if output.state %}
+    <li><font color="green">{{ output }} </font><a href="{% url 'OR_web_GUI:relay_toggle' output.id %}">Switch State</a></li>
+        {% else %}
+    <li><font color="red">{{ output }} </font><a href="{% url 'OR_web_GUI:relay_toggle' output.id %}">Switch State</a></li>
+        {% endif %}
     {% empty %}
         <li>No outputs have been created</li>
     {% endfor %}
