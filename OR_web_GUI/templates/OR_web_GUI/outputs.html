@@ -5,6 +5,7 @@
 <p>Outputs - (green is HIGH, red is LOW)</p>
 <a href="{% url 'OR_web_GUI:new_output' %}">Add a new Output</a>
 
+
 <ul>
     {% for output in outputs %}
         {% if output.state %}

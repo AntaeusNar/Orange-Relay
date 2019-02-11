@@ -3,7 +3,8 @@
 {% block content %}
 
 <p>Rules</p>
-
+<a href="{% url 'OR_web_GUI:new_rule' %}">Add a new rule</a>
+<!-- todo: add options to edit rules -->
 <ul>
     {% for rule in rules %}
         <li>{{ rule }}</li>

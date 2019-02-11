@@ -1,0 +1,13 @@
+{% extends 'OR_web_GUI/base.html' %}
+
+{% block content %}
+
+<p>Add a new rule:</p>
+
+<form action="{% url 'OR_web_GUI:new_rule' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">add rule</button>
+</form>
+
+{% endblock content %}
