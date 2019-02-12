@@ -4,7 +4,7 @@
 
 <p>Add a new output:</p>
 
-<!-- todo: depreciate because of fixed output detection -->
+<!--  -->
 <form action="{% url 'OR_web_GUI:new_output' %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}

@@ -26,10 +26,8 @@ class Output(models.Model):
         return self.text+" channel: "+str(self.channel)
 
 
-
-
 class Rule(models.Model):
-    # todo: rebuild the rule models to allow for many to many inputs and outputs and rule logic
+    # todo: remove from code and database
     """what when what"""
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
     output = models.ForeignKey(Output, on_delete=models.CASCADE)
