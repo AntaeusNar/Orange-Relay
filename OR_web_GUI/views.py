@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 from .models import Rule, Input, Output
-from .forms import OutputForm, RulesForm
+from .forms import OutputForm, RulesForm, LinkingLogicForm
 
 
 """In order to get around not have select.epoll in a windows environment we are implementing
@@ -76,10 +76,10 @@ def new_rule(request):
     """adds new rules"""
     if request.method != 'POST':
         # no data submitted; create a blank form
-        form = RulesForm
+        form = LinkingLogicForm
     else:
         # POST data submitted; process data.
-        form = RulesForm(data=request.POST)
+        form = LinkingLogicForm(data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('OR_web_GUI:rules'))
