@@ -1,12 +1,47 @@
-#  This file should only load AFTER OPi.GPIO is loaded, if that one is needed.  Here we are wanted to override some
-#  functionality of the OPi.GPIO to give a little bit more of an emulation.  honestly this probably needs to be
-#  forked and rewritten as a separate package for dev work, but here we are.....
+# This file will load only if OPi.GPIO fails because of a Dev environment.
 
 # The basic idea is that when a pin is made HIGH or LOW it is writen into a file,
 # and then when the input is checked it reads the file.......
 
 from . import extendJSON as JSON
 
+# Values
+LOW = 0
+HIGH = 1
+
+# Modes
+BCM = 11
+BOARD = 10
+
+# Pull
+PUD_OFF = 20
+PUD_DOWN = 21
+PUD_UP = 22
+
+# Edges
+RISING = 31
+FALLING = 32
+BOTH = 33
+
+# Functions
+OUT = 0
+IN = 1
+SERIAL = 40
+SPI = 41
+I2C = 42
+HARD_PWM = 43
+UNKNOWN = -1
+
+def setwarnings( a): pass
+
+
+def setmode(a): pass
+
+
+def getmode(): return BCM
+
+
+def setup(channel, state, initial=0, pull_up_down=None): pass
 
 def output(channel, state):
     """
@@ -52,3 +87,24 @@ def input(channel):
         state = pins[channel]
 
     return state
+
+
+def cleanup(a=None): pass
+
+
+def wait_for_edge(channel, edge): pass
+
+
+def add_event_detect(channel, edge, callback=None, bouncetime=None): pass
+
+
+def add_event_callback(channel, callback=None): pass
+
+
+def remove_event_detect(channel): pass
+
+
+def event_detected(channel): return False
+
+
+def gpio_function(channel): return OUT

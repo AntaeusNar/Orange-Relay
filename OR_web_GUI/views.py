@@ -13,10 +13,11 @@ try:
     import OPi.GPIO as GPIO
     fake = False
 except ImportError:
-    # import FakeRPi.GPIO as GPIO
     from . import extendGPIO as GPIO
     fake = True
     print('The linux_interaction() function was not executed')
+
+
 
 # Create your views here.
 
