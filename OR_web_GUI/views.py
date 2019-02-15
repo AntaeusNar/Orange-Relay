@@ -85,7 +85,7 @@ def new_rule(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('OR_web_GUI:rules'))
-    context = {'form': form}
+    context = {'form': form, 'fake': fake}
     return render(request, 'OR_web_GUI/new_rule.html', context)
 
 #  action views: basically there is no real reason hitting a url NEEDS to return a web page, that just what we do when
