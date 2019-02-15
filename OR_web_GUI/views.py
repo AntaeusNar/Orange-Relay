@@ -78,7 +78,7 @@ def new_rule(request):
     """adds new rules"""
     if request.method != 'POST':
         # no data submitted; create a blank form
-        form = RulesForm
+        form = RulesForm(initial={'action': 'T', 'times': 'P'})
     else:
         # POST data submitted; process data.
         form = RulesForm(data=request.POST)

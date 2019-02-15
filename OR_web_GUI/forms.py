@@ -13,8 +13,9 @@ class OutputForm(forms.ModelForm):
 class RulesForm(forms.ModelForm):
     class Meta:
         model = Rule
-        fields = ['input', 'output', 'text']
-        labels = {'input': 'Triggering Input', 'output': 'Triggered Output', 'text': 'Description of Rule'}
+        fields = ['text', 'input', 'output', 'action', 'times', 'length']
+        labels = {'input': 'Triggering Input', 'output': 'Triggered Output', 'text': 'Description of Rule',
+                  'times': 'Length of action', 'length': 'Timer'}
 
 
 class LinkingLogicForm(forms.Form):
