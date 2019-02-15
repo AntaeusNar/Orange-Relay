@@ -9,9 +9,9 @@
 <ul>
     {% for output in outputs %}
         {% if output.state %}
-            <li><font color="green">{{ output }} </font><a href="{% url 'OR_web_GUI:state_toggle' output.id %}">Toggle Output</a></li>
+            <li><font color="green">{{ output }} </font><a href="{% url 'OR_web_GUI:state_toggle' output.id 'Output' %}">Toggle Output</a></li>
         {% else %}
-            <li><font color="red">{{ output }} </font><a href="{% url 'OR_web_GUI:state_toggle' output.id %}">Toggle Output</a></li>
+            <li><font color="red">{{ output }} </font><a href="{% url 'OR_web_GUI:state_toggle' output.id 'Output' %}">Toggle Output</a></li>
         {% endif %}
     {% empty %}
         <li>No outputs have been created</li>

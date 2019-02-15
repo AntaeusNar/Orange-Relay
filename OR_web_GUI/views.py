@@ -13,7 +13,7 @@ try:
     import OPi.GPIO as GPIO
     fake = False
 except ImportError:
-    from . import extendGPIO as GPIO
+    from .packages import extendGPIO as GPIO
     fake = True
     print('The linux_interaction() function was not executed')
 
@@ -92,7 +92,7 @@ def new_rule(request):
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins
 
 
-def state_toggle(request, key_id, whichmodel='Output'):
+def state_toggle(request, key_id, whichmodel='Input'):
     if whichmodel == 'Output':
         # This will toggle the output when the view is requested
         # and then return the requester to the last page they where viewing
