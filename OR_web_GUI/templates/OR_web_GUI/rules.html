@@ -7,7 +7,14 @@
 <!-- todo: add options to edit rules -->
 <ul>
     {% for rule in rules %}
-        <li>{{ rule }}</li>
+        <li>{{ rule }} <a href="{% url 'OR_web_GUI:state_toggle' rule.id %}">Trigger Rule</a></li>
+            <ul>
+                {% if rule.output.state %}
+                    <li><font color="green">{{ rule.output }} </font></li>
+                {% else %}
+                    <li><font color="red">{{ rule.output }} </font></li>
+                {% endif %}
+            </ul>
     {% empty %}
         <li>No Rules have been created</li>
     {% endfor %}

@@ -34,6 +34,8 @@ def index(request):
 def rules(request):
     """Shows the rules"""
     rules = Rule.objects.order_by('date_added')
+    for rule in rules:
+        rule.output.state = GPIO.input(rule.output.channel)
     context = {'rules': rules, 'fake': fake}
     return render(request, 'OR_web_GUI/rules.html', context)
 
