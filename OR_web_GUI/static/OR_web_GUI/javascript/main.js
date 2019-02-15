@@ -51,17 +51,3 @@ function ShowNewRulesForm(){
     length.label.style.display = 'block';
 }
 
-//window.onload = FindLabels, HideNewRulesForm;
-
-//$("#id_length").hide(); // length field
-
-//('#id_times').on('change', function(){
-//    var optionSelected = $("option:selected", this);
- //   var valueSelected = this.value;
- //   if (valueSelected == 'T') {
-//      $('#id_length').show();
-//    } else {
-//      $('#id_length').hide();
-//    }
-//    return false;
-//});
