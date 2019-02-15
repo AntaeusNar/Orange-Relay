@@ -15,6 +15,10 @@ function ElementsEvents(){
     {
         document.getElementById('id_times').addEventListener("change", ShowHideNewRulesForm);
     }
+    if (document.getElementById('id_output'))
+    {
+        document.getElementById('id_output').addEventListener("change", ShowHideNewRulesForm);
+    }
 }
 
 
@@ -37,9 +41,9 @@ function ShowHideById(id, state = "toggle"){
     var current = document.getElementById(id);
     if (state == 'toggle'){
         if (current.style.display == 'none'){
-            current.style.display = 'block';
-            current.label.style.display = 'block';
-        } else if (current.style.display == 'block'){
+            current.style.display = 'inline';
+            current.label.style.display = 'inline';
+        } else if (current.style.display == 'inline'){
             current.style.display = 'none';
             current.label.style.display = 'none';
         }
@@ -47,8 +51,8 @@ function ShowHideById(id, state = "toggle"){
         current.style.display = 'none';
         current.label.style.display = 'none';
     } else if (state == 'show') {
-        current.style.display = 'block';
-        current.label.style.display = 'block';
+        current.style.display = 'inline';
+        current.label.style.display = 'inline';
     }
 }
 
@@ -56,15 +60,24 @@ function ShowHideById(id, state = "toggle"){
 //looks for, checks and hides items inside the newrules form
 function ShowHideNewRulesForm(){
     if (document.getElementById('id_times')){
-        var sel = document.getElementById('id_times');
-        var optionSelected = sel.options.item(sel.options.selectedIndex).value;
-        if (optionSelected == 'T') {
-            //document.getElementById('id_length').style.display = 'block'
-            ShowHideById("id_length", "show");
-        }else {
-            //document.getElementById('id_length').style.display = 'none'
-            ShowHideById("id_length", "hide");
-        }
+        var out = document.getElementById('id_output');
+        var outoption = out.options.item(out.options.selectedIndex).value;
+        if (outoption != ''){
+            ShowHideById('id_action', 'show');
+            ShowHideById('id_times', 'show');
+            var sel = document.getElementById('id_times');
+            var optionSelected = sel.options.item(sel.options.selectedIndex).value;
+            if (optionSelected == 'T') {
+                //document.getElementById('id_length').style.display = 'block'
+                ShowHideById("id_length", "show");
+            }else {
+                //document.getElementById('id_length').style.display = 'none'
+                ShowHideById("id_length", "hide");
+            }
+        } else {
+            ShowHideById('id_action', 'hide');
+            ShowHideById('id_times', 'hide');
+            ShowHideById('id_length', 'hide')}
     }
 }
 
