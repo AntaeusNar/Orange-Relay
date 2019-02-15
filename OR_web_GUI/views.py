@@ -18,7 +18,6 @@ except ImportError:
     print('The linux_interaction() function was not executed')
 
 
-
 # Create your views here.
 
 # base views
@@ -77,10 +76,10 @@ def new_rule(request):
     """adds new rules"""
     if request.method != 'POST':
         # no data submitted; create a blank form
-        form = LinkingLogicForm
+        form = RulesForm
     else:
         # POST data submitted; process data.
-        form = LinkingLogicForm(data=request.POST)
+        form = RulesForm(data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('OR_web_GUI:rules'))
@@ -91,18 +90,24 @@ def new_rule(request):
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins
 
 
-def relay_toggle(request, output_id):
-    # This will toggle the output when the view is requested
-    # and then return the requester to the last page they where viewing
-    """will grab the output sent to it and change the state of said output"""
-    output = Output.objects.get(id=output_id)
-    """sets up the PIN"""
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(output.channel, GPIO.OUT)
-    """toggles the current state"""
-    GPIO.output(output.channel, not GPIO.input(output.channel))
-    """should return back to previous page"""
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+def state_toggle(request, key_id, whichmodel='Output'):
+    if whichmodel == 'Output':
+        # This will toggle the output when the view is requested
+        # and then return the requester to the last page they where viewing
+        """will grab the output sent to it and change the state of said output"""
+        output = Output.objects.get(id=key_id)
+        """sets up the PIN"""
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(output.channel, GPIO.OUT)
+        """toggles the current state"""
+        GPIO.output(output.channel, not GPIO.input(output.channel))
+        """should return back to previous page"""
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    elif whichmodel == 'Input':
+        # todo: add state changes based on rules or inputs
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    elif whichmodel == 'Rule':
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 def relay_state(request, output_id):

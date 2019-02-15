@@ -27,10 +27,28 @@ class Output(models.Model):
 
 
 class Rule(models.Model):
-    # todo: remove from code and database
     """what when what"""
+    ACTIONS = (
+        ('H', 'Set Output High'),
+        ('L', 'Set Output Low'),
+        ('T', 'Toggle Output'),
+    )
+    TIMES = (
+        ('M', 'Momentary'),
+        ('T', 'Timed'),
+        ('L', 'Latched'),
+        ('P', 'Permanent')
+    )
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
     output = models.ForeignKey(Output, on_delete=models.CASCADE)
+    # what to do when triggered
+    action = models.CharField(max_length=1, choices=ACTIONS, default='P')
+    # how long to hold the action for in types
+    #   momentary is just 10ms, Timed can be longer,
+    #   Latched is until unlatched, Permanent is til next trigger
+    times = models.CharField(max_length=1, choices=TIMES, default='L')
+    # length of time for timed
+    length = models.IntegerField(default=0)
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     last_used = models.DateTimeField(auto_now_add=True)
@@ -41,10 +59,11 @@ class Rule(models.Model):
 
 
 # Start of rules v2
+# Currently unused
 
 
 class EvalExpression(models.Model):
-    # This should be a evaluatalbe expession hopefully using basic if then logic and true false booleans
+    # This should be a evaluable expression hopefully using basic if then logic and true false booleans
     descript = models.CharField(max_length=200)
     eval = models.CharField(max_length=200)
     input = models.ManyToManyField(Input, through='Relation', related_name='expressions')
