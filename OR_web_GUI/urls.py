@@ -20,7 +20,7 @@ urlpatterns = [
     path('new_rule/', views.new_rule, name='new_rule'),
     # Function 'Pages'
     path('state_toggle/<int:key_id>/', views.state_toggle, name='state_toggle'),
-    path('state_toggle/<int:key_id>/<str:whichmodel>/', views.state_toggle, name='state_toggle'),
+    path('state_toggle/<str:whichmodel>/<int:key_id>/', views.state_toggle, name='state_toggle'),
     path('relaystatus/<int:output_id>/', views.relay_state, name='relay_state'),
 
     # Other urls

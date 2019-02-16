@@ -94,23 +94,14 @@ def new_rule(request):
 
 def state_toggle(request, key_id, whichmodel='Input'):
     if whichmodel == 'Output':
-        # This will toggle the output when the view is requested
-        # and then return the requester to the last page they where viewing
-        """will grab the output sent to it and change the state of said output"""
-        output = Output.objects.get(id=key_id)
-        """sets up the PIN"""
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(output.channel, GPIO.OUT)
-        """toggles the current state"""
-        GPIO.output(output.channel, not GPIO.input(output.channel))
-        """should return back to previous page"""
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        relay_control(key_id)
     elif whichmodel == 'Input':
         # todo: add state changes based on rules or inputs
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        fish
     elif whichmodel == 'Rule':
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-
+        follow_the_rules(key_id)
+        """should return back to previous page"""
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def relay_state(request, output_id):
     """will grab the output sent to it and return the state of said output"""
@@ -122,3 +113,34 @@ def relay_state(request, output_id):
         return render(request, 'OR_web_GUI/outputStateRed.html')
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+# additional functions......
+
+def follow_the_rules(rule_id):
+    # should be given a rule follow the logic and then trigger the correct relay(s)
+    rule = Rule.objects.get(id=rule_id)
+    if rule.action == 'H':
+        # set output high
+        key_id = rule.output.pk
+        relay_control(key_id, 'high')
+    elif rule.action == 'L':
+        # set output low
+        key_id = rule.output.pk
+        relay_control(key_id, 'low')
+    elif rule.action == 'T':
+        # toggle output
+        key_id = rule.output.pk
+        relay_control(key_id, 'toggle')
+
+def relay_control(key_id, state = 'toggle'):
+    # takes a relay and sets it to the requested state
+    output = Output.objects.get(id=key_id)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(output.channel, GPIO.OUT)
+    if state == 'toggle':
+        GPIO.output(output.channel, not GPIO.input(output.channel))
+    elif state == 'high':
+        GPIO.output(output.channel, GPIO.HIGH)
+    elif state == 'low':
+        GPIO.output(output.channel, GPIO.LOW)
