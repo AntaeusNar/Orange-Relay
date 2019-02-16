@@ -103,6 +103,7 @@ def state_toggle(request, key_id, whichmodel='Input'):
         """should return back to previous page"""
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
 def relay_state(request, output_id):
     """will grab the output sent to it and return the state of said output"""
     output = Output.objects.get(id=output_id)
@@ -133,7 +134,8 @@ def follow_the_rules(rule_id):
         key_id = rule.output.pk
         relay_control(key_id, 'toggle')
 
-def relay_control(key_id, state = 'toggle'):
+
+def relay_control(key_id, state='toggle'):
     # takes a relay and sets it to the requested state
     output = Output.objects.get(id=key_id)
     GPIO.setmode(GPIO.BOARD)
