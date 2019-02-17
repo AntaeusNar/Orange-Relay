@@ -89,12 +89,17 @@ class Conditions(models.Model):
     length = models.IntegerField(default=0)
 
 
+# rules v2 expansion
+#   - Linking - any number of input conditions can trigger a single logic test
+#   which when evaluated as true can trigger any number of output conditions
+
+
 class Linking(models.Model):
-    # which input conditions trigger which logic tests to tirgger which output conditions
+    # which input conditions trigger which logic tests to trigger which output conditions
     description = models.CharField(max_length=50)
     logic_test = models.CharField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)
-    last_used = models.DateTimeField(auto_now_add=True)
+    last_true = models.DateTimeField(null=True)
 
 
 class InputConditions(models.Model):
