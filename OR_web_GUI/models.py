@@ -65,3 +65,51 @@ class Rule(models.Model):
 #   one Logic command, and many Outputs(each with its own Condition)
 # E.I. IF (Input #1 is HIGH & Input #3 is LOW)
 #   set (Output # 4 HIGH LATCHED & Output #5 LOW TIMED 10sec & Output #1 Toggle)
+
+
+class Conditions(models.Model):
+    ACTIONS = (
+        ('H', 'Set Output High'),
+        ('L', 'Set Output Low'),
+        ('T', 'Toggle Output'),
+    )
+    TIMES = (
+        ('M', 'Momentary'),
+        ('T', 'Timed'),
+        ('L', 'Latched'),
+        ('P', 'Permanent')
+    )
+    # what to do when triggered
+    action = models.CharField(max_length=1, choices=ACTIONS, default='P')
+    # how long to hold the action for in types
+    #   momentary is just 10ms, Timed can be longer,
+    #   Latched is until unlatched, Permanent is til next trigger
+    times = models.CharField(max_length=1, choices=TIMES, default='L')
+    # length of time for timed
+    length = models.IntegerField(default=0)
+
+
+class Linking(models.Model):
+    # which input conditions trigger which logic tests to tirgger which output conditions
+    description = models.CharField(max_length=50)
+    logic_test = models.CharField(max_length=500)
+    date_added = models.DateTimeField(auto_now_add=True)
+    last_used = models.DateTimeField(auto_now_add=True)
+
+
+class InputConditions(models.Model):
+    input = models.ForeignKey(Input, on_delete=models.CASCADE)
+    condition = models.ForeignKey(Conditions, on_delete=models.CASCADE)
+    link = models.ForeignKey(Linking, on_delete=models.CASCADE)
+
+
+class OutputConditions(models.Model):
+    output = models.ForeignKey(Output, on_delete=models.CASCADE)
+    condition = models.ForeignKey(Conditions, on_delete=models.CASCADE)
+    link = models.ForeignKey(Linking, on_delete=models.CASCADE)
+
+
+
+
+
+
