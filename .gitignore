@@ -106,3 +106,7 @@ OR_env/
 
 # Pycharm
 .idea/
+
+
+# Project
+pins.json
