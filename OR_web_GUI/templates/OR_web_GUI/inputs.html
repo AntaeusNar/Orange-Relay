@@ -13,9 +13,9 @@
                 {% for rule in input.rule_set.all %}
                     <li>{{ rule }}</li>
                         <ul>
-                            {% if rule.output.state and rule.output.state != null %}
+                            {% if status[rule.output.pk].item %}
                                 <li><font color="green">{{ rule.output }} </font></li>
-                            {% elif not rule.output.state and rule.output.state != null %}
+                            {% elif not status{rule.output.pk] %}
                                 <li><font color="red">{{ rule.output }} </font></li>
                             {% else %}
                                 <li>{{rule.output}}</li>

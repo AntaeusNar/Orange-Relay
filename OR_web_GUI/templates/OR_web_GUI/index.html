@@ -16,7 +16,11 @@
         {% endfor %}
     <h3>Outputs</h3>
         {% for output in outputs %}
-            <li>{{ output }}</li>
+            {% if output.state %}
+            <li><font color="green">{{ output }} </font></li>
+        {% else %}
+            <li><font color="red">{{ output }} </font></li>
+        {% endif %}
         {% empty %}
             <li>No Outputs in database.</li>
         {% endfor %}

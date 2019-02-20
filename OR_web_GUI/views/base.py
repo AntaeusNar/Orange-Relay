@@ -1,5 +1,6 @@
 # django imports
 from django.shortcuts import render
+from django.template.defaulttags import register
 
 # local imports
 from OR_web_GUI.models import Rule, Input, Output
@@ -14,12 +15,19 @@ except ImportError:
     print('The linux_interaction() function was not executed')
 
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+    # Usage: in template -> {{ mydict|get_item:item.NAME }}
+
+
 def index(request):
     # Basic Index
-    # todo: expand to show status of outputs
     inputs = Input.objects.order_by('date_added')
     rules = Rule.objects.order_by('date_added')
     outputs = Output.objects.order_by('date_added')
+    for output in outputs:
+        output.state = GPIO.input(output.channel)
     context = {'inputs': inputs, 'outputs': outputs, 'rules': rules, 'fake': fake}
     return render(request, 'OR_web_GUI/index.html', context)
 
@@ -36,16 +44,12 @@ def rules(request):
 def inputs(request):
     # Inputs index page
     inputs = Input.objects.order_by('date_added')
+    status = {}
     # todo: fix inop code to allow for showing the status of related outputs
-    """     - this code is inop, the adjusted state doesn't get passed on
     for input in inputs:
-        print(input)
         for rule in input.rule_set.all():
-            print(rule)
-            rule.output.state = GPIO.input(rule.output.channel)
-            print(rule.output.state)
-    """
-    context = {'inputs': inputs, 'fake': fake}
+            status['rule.output.pk'] = GPIO.input(rule.output.channel)
+    context = {'inputs': inputs, 'status': status, 'fake': fake}
     return render(request, 'OR_web_GUI/inputs.html', context)
 
 
