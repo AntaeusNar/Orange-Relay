@@ -23,11 +23,3 @@ class InputForm(forms.ModelForm):
         model = Input
         fields = {'text'}
 
-
-class LinkingLogicForm(forms.Form):
-    # this form should allow the user to select an input and condition and then set an output state
-    # todo: Fix this for general use
-    # input = forms.ModelChoiceField(queryset=Input)
-    # state = forms.ChoiceField(choices=('HIGH', 'LOW'))
-    # logic = forms.ChoiceField(choices=('AND', 'OR', 'XAND', 'XOR', 'NOT'))
-    pass

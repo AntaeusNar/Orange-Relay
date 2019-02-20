@@ -14,6 +14,8 @@ except ImportError:
 
 
 def follow_the_rules(rule_id):
+    # todo: rebuild to allow for logic
+    # todo: rebuild to allow for timed control
     # should be given a rule follow the logic and then trigger the correct relay(s)
     rule = Rule.objects.get(id=rule_id)
     if rule.action == 'H':
@@ -44,7 +46,8 @@ def relay_control(key_id, state='toggle'):
 
 
 def check_status(key_id, whichmodel):
-    # todo: fix this mess.....
+    # todo: rebuild to be single point of status checking
+    # todo: build new function to allow for ajax calls
     # takes a key_id and model type and gets the status (high/true or low/false) of related outputs returned as a dic
     # dic = {
     #   rules:

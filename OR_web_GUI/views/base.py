@@ -16,6 +16,7 @@ except ImportError:
 
 def index(request):
     # Basic Index
+    # todo: expand to show status of outputs
     inputs = Input.objects.order_by('date_added')
     rules = Rule.objects.order_by('date_added')
     outputs = Output.objects.order_by('date_added')
@@ -35,6 +36,7 @@ def rules(request):
 def inputs(request):
     # Inputs index page
     inputs = Input.objects.order_by('date_added')
+    # todo: fix inop code to allow for showing the status of related outputs
     """     - this code is inop, the adjusted state doesn't get passed on
     for input in inputs:
         print(input)

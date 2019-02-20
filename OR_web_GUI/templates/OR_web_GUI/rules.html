@@ -4,7 +4,7 @@
 
 <p>Rules</p>
 <a href="{% url 'OR_web_GUI:new_rule' %}">Add a new rule</a>
-<!-- todo: add options to edit rules -->
+
 <ul>
     {% for rule in rules %}
         <li>{{ rule }} <a href="{% url 'OR_web_GUI:state_toggle' 'Rule' rule.id %}">Trigger Rule</a></li>

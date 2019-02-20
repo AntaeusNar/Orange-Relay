@@ -22,7 +22,6 @@ urlpatterns = [
 
     # Action 'Pages'
     path('state_toggle/<str:whichmodel>/<int:key_id>/', views.state_toggle, name='state_toggle'),
-    path('relaystatus/<int:output_id>/', views.relay_state, name='relay_state'),
 
     # Other urls
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('OR_web_GUI/img/favicon.ico'), permanent=False), name='favicon'),
