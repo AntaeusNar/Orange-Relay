@@ -90,3 +90,12 @@ function httpGetAsync(url, callback){
         xmlHttp.open("GET", url, true);
         xmlHttp.send(null);
 }
+
+//get output status
+function updateStatus(){
+    var url = "/ajax/outputstatus/?id=all"
+}
+
+// Todo: be able to update html display,
+// todo: request some or all output status
+// todo: parse the responce
