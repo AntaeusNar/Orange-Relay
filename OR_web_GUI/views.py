@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core import serializers
 
 
 from .models import Rule, Input, Output
-from .forms import OutputForm, RulesForm, LinkingLogicForm
+from .forms import OutputForm, RulesForm, InputForm, LinkingLogicForm
 
 
 """In order to get around not have select.epoll in a windows environment we are implementing
@@ -43,6 +44,12 @@ def rules(request):
 def inputs(request):
     """shows the inputs"""
     inputs = Input.objects.order_by('date_added')
+    for input in inputs:
+        print(input)
+        for rule in input.rule_set.all():
+            print(rule)
+            rule.output.state = GPIO.input(rule.output.channel)
+            print(rule.output.state)
     context = {'inputs': inputs, 'fake': fake}
     return render(request, 'OR_web_GUI/inputs.html', context)
 
@@ -88,11 +95,24 @@ def new_rule(request):
     context = {'form': form, 'fake': fake}
     return render(request, 'OR_web_GUI/new_rule.html', context)
 
+
+def new_input(request):
+    """adds new inputs"""
+    if request.method != 'POST':
+        form = InputForm()
+    else:
+        form = InputForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('OR_web_GUI:inputs'))
+    context = {'form' : form, 'fake': fake}
+    return render(request, 'OR_web_GUI/new_input.html', context)
+
 #  action views: basically there is no real reason hitting a url NEEDS to return a web page, that just what we do when
 #  we let people use it, but we can have the 'view' do other things, like activate gpio pins
 
 
-def state_toggle(request, key_id, whichmodel='Input'):
+def state_toggle(request, whichmodel, key_id):
     if whichmodel == 'Output':
         relay_control(key_id)
     elif whichmodel == 'Input':
@@ -146,3 +166,24 @@ def relay_control(key_id, state='toggle'):
         GPIO.output(output.channel, GPIO.HIGH)
     elif state == 'low':
         GPIO.output(output.channel, GPIO.LOW)
+
+
+def check_status(key_id, whichmodel):
+    # todo: fix this mess.....
+    # takes a key_id and model type and gets the status (high/true or low/false) of related outputs returned as a dic
+    # dic = {
+    #   rules:
+    statuses = {}
+    if whichmodel == 'Input':
+        input = Input.objects.get(id=key_id)
+        for rule in input.rule_set.all():
+            statuses[rule.pk] = {}
+            for output in rule.outputs:
+                pass
+    elif whichmodel == 'Rule':
+        pass
+    elif whichmodel == 'Output':
+        pass
+
+
+# ajax views

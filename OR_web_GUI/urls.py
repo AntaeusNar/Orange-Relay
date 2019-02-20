@@ -18,8 +18,8 @@ urlpatterns = [
     # Configuration Pages
     path('new_output/', views.new_output, name='new_output'),
     path('new_rule/', views.new_rule, name='new_rule'),
+    path('new_input/', views.new_input, name='new_input'),
     # Function 'Pages'
-    path('state_toggle/<int:key_id>/', views.state_toggle, name='state_toggle'),
     path('state_toggle/<str:whichmodel>/<int:key_id>/', views.state_toggle, name='state_toggle'),
     path('relaystatus/<int:output_id>/', views.relay_state, name='relay_state'),
 

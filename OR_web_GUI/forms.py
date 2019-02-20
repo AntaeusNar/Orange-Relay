@@ -18,6 +18,12 @@ class RulesForm(forms.ModelForm):
                   'times': 'Length of action', 'length': 'Timer'}
 
 
+class InputForm(forms.ModelForm):
+    class Meta:
+        model = Input
+        fields = {'text'}
+
+
 class LinkingLogicForm(forms.Form):
     # this form should allow the user to select an input and condition and then set an output state
     # todo: Fix this for general use

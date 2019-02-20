@@ -9,10 +9,12 @@
     {% for rule in rules %}
         <li>{{ rule }} <a href="{% url 'OR_web_GUI:state_toggle' 'Rule' rule.id %}">Trigger Rule</a></li>
             <ul>
-                {% if rule.output.state %}
+                {% if rule.output.state and rule.output.state != null %}
                     <li><font color="green">{{ rule.output }} </font></li>
-                {% else %}
+                {% elif not rule.output.state and rule.output.state != null %}
                     <li><font color="red">{{ rule.output }} </font></li>
+                {% else %}
+                    <li>{{rule.output}}</li>
                 {% endif %}
             </ul>
     {% empty %}

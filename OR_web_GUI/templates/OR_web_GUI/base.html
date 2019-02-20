@@ -1,21 +1,31 @@
-{% load static %}
-
-<!DOCTYPE html>
-<script type="text/javascript" src="{% static 'OR_web_GUI/javascript/main.js' %}"></script>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% block header %}{% endblock header %}
-    <a href="{% url 'OR_web_GUI:index' %}">Orange Relays</a> -
-    <a href="{% url 'OR_web_GUI:rules' %}">Rules</a> -
-    <a href="{% url 'OR_web_GUI:inputs' %}">Inputs</a> -
-    <a href="{% url 'OR_web_GUI:outputs' %}">Outputs</a>
-</head>
-<body>
-    {% if fake %}
-<div title="If you're reading this, you've been in a coma for almost 20 years. We're trying a new technique.  We don't know where this message will end up in your dream, but we hope we're getting through.  Please wake up. We miss you."><h1>Hover here</h1></div>
-    {% endif %}
-    {% block content %}{% endblock content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} {% endblock %}</title>
+        {% block header %}
+        {% endblock %}
 
-</body>
+    </head>
+    <body>
+        <header>
+            {% if fake %}
+                <div title="If you're reading this, you've been in a coma for almost 20 years. We're trying a new technique.  We don't know where this message will end up in your dream, but we hope we're getting through.  Please wake up. We miss you."><h1>Hover here</h1></div>
+            {% endif %}
+            <a href="{% url 'OR_web_GUI:index' %}">Orange Relays</a> -
+            <a href="{% url 'OR_web_GUI:rules' %}">Rules</a> -
+            <a href="{% url 'OR_web_GUI:inputs' %}">Inputs</a> -
+            <a href="{% url 'OR_web_GUI:outputs' %}">Outputs</a>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer>
+
+        </footer>
+        <script type="text/javascript" src="{% static 'OR_web_GUI/javascript/main.js' %}"></script>
+        {% block javascript %}
+        {% endblock %}
+    </body>
 </html>

@@ -4,9 +4,25 @@
 
 <p>Inputs</p>
 
+<a href="{% url 'OR_web_GUI:new_input' %}">Add a new Input</a>
+
 <ul>
     {% for input in inputs %}
-        <li>{{ input }}</li>
+        <li>{{ input }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.id %}">Trigger Input</a></li>
+            <ul>
+                {% for rule in input.rule_set.all %}
+                    <li>{{ rule }}</li>
+                        <ul>
+                            {% if rule.output.state and rule.output.state != null %}
+                                <li><font color="green">{{ rule.output }} </font></li>
+                            {% elif not rule.output.state and rule.output.state != null %}
+                                <li><font color="red">{{ rule.output }} </font></li>
+                            {% else %}
+                                <li>{{rule.output}}</li>
+                            {% endif %}
+                        </ul>
+                {% endfor %}
+            </ul>
     {% empty %}
         <li>No inputs have been created</li>
     {% endfor %}
