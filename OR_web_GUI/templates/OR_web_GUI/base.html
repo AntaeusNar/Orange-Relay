@@ -24,8 +24,9 @@
         <footer>
 
         </footer>
-        <script type="text/javascript" src="{% static 'OR_web_GUI/javascript/main.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'OR_web_GUI/javascript/main.js' %}"></script> -->
         {% block javascript %}
+            <script src="{{ STATIC_URL }}javascript/main.js"></script>
         {% endblock %}
     </body>
 </html>

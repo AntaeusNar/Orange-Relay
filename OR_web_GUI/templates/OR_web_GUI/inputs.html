@@ -29,3 +29,8 @@
 </ul>
 
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }} {# includes previous content in block #}
+    {# view-specific imports here #}
+{% endblock %}
