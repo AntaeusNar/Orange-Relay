@@ -1,20 +1,26 @@
 {% extends 'OR_web_GUI/base.html' %}
-{% load static %}
 
 {% block content %}
 
-<h3>Inputs</h3>
-{% for input in inputs %}
-    <li>{{ input }}</li>
-{% empty %}
-    <li>No Inputs used in rules.</li>
-{% endfor %}
-<h3>Outputs</h3>
-{% for output in outputs %}
-    <li>{{ output }}</li>
-{% empty %}
-    <li>No Outputs used in rules.</li>
-{% endfor %}
+    <h3>Inputs</h3>
+        {% for input in inputs %}
+            <li>{{ input }}</li>
+        {% empty %}
+            <li>No Inputs in database.</li>
+        {% endfor %}
+    <h3>Rules</h3>
+        {% for rule in rules %}
+            <li>{{ rule  }}</li>
+        {% empty %}
+            <li>No Rules in database.</li>
+        {% endfor %}
+    <h3>Outputs</h3>
+        {% for output in outputs %}
+            <li>{{ output }}</li>
+        {% empty %}
+            <li>No Outputs in database.</li>
+        {% endfor %}
+
 {% endblock content %}
 
 
