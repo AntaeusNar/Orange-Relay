@@ -1,3 +1,5 @@
+"""Configuration, editing and other interactive forward facing views"""
+
 # django imports
 from django.shortcuts import render
 from django.http import HttpResponseRedirect

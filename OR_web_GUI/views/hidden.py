@@ -1,3 +1,5 @@
+"""Normal functions we want loaded with the views"""
+
 # local imports
 from OR_web_GUI.models import Rule, Input, Output
 
