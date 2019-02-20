@@ -6,15 +6,6 @@ from django.urls import reverse
 # local imports
 from OR_web_GUI.forms import OutputForm, RulesForm, InputForm
 
-# import for GPIO in real vs. test env
-try:
-    import OPi.GPIO as GPIO
-    fake = False
-except ImportError:
-    from OR_web_GUI.packages import extendGPIO as GPIO
-    fake = True
-    print('The linux_interaction() function was not executed')
-
 
 def new_rule(request):
     # Add additional rules
