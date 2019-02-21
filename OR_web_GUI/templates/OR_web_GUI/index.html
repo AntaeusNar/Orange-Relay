@@ -3,20 +3,9 @@
 {% block content %}
 
     <h3>Inputs</h3>
-        {% for input in inputs %}
-            <li>{{ input }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.id %}">Trigger Input</a></li>
-        {% empty %}
-            <li>No Inputs in database.</li>
-        {% endfor %}
+        {% include "./input_list.html" %}
     <h3>Rules</h3>
         {% include "./rule_list.html" %}
-        <!--
-        {% for rule in rules %}
-            <li>{{ rule  }} <a href="{% url 'OR_web_GUI:state_toggle' 'Rule' rule.id %}">Trigger Rule</a></li>
-        {% empty %}
-            <li>No Rules in database.</li>
-        {% endfor %}
-        -->
     <h3>Outputs</h3>
         {% include "./output_status.html" %}
 
