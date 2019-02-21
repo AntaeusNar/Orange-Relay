@@ -18,7 +18,7 @@
                 {% endif %}
             </ul>
     {% empty %}
-        <li>No Rules have been created</li>
+        <li>No Rules have been created <a href="{% url 'OR_web_GUI:new_rule' %}">Add a rule</a></li>
     {% endfor %}
 </ul>
 

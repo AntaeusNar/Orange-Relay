@@ -35,7 +35,7 @@
     {% for input in inputs %}
         <li>{{input}}</li>
     {% empty %}
-        <li>No Inputs Created</li>
+        <li>No Inputs Created  <a href="{% url 'OR_web_GUI:new_input' %}">Add an Input</a></li>
     {% endfor %}
 </ul>
 {% endblock content %}

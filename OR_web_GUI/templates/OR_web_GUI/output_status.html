@@ -6,6 +6,6 @@
             <li id="output_{{ output.pk}}"><font color="red">{{ output }} </font><a href="{% url 'OR_web_GUI:state_toggle' 'Output' output.id %}">Toggle Output</a></li>
         {% endif %}
     {% empty %}
-        <li>No outputs have been created</li>
+        <li>No outputs have been created <a href="{% url 'OR_web_GUI:new_output' %}">Add an Output</a></li>
     {% endfor %}
 </ul>
