@@ -5,22 +5,7 @@
 <p>Rules</p>
 <a href="{% url 'OR_web_GUI:new_rule' %}">Add a new rule</a>
 
-<ul>
-    {% for rule in rules %}
-        <li>{{ rule }} <a href="{% url 'OR_web_GUI:state_toggle' 'Rule' rule.id %}">Trigger Rule</a></li>
-            <ul>
-                {% if rule.output.state and rule.output.state != null %}
-                    <li><font color="green">{{ rule.output }} </font></li>
-                {% elif not rule.output.state and rule.output.state != null %}
-                    <li><font color="red">{{ rule.output }} </font></li>
-                {% else %}
-                    <li>{{rule.output}}</li>
-                {% endif %}
-            </ul>
-    {% empty %}
-        <li>No Rules have been created <a href="{% url 'OR_web_GUI:new_rule' %}">Add a rule</a></li>
-    {% endfor %}
-</ul>
+{% include "./rule_list.html" %}
 
 {% endblock content %}
 

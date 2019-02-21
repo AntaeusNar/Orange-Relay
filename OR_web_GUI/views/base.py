@@ -19,6 +19,8 @@ def index(request):
     # Basic Index
     inputs = Input.objects.order_by('date_added')
     rules = Rule.objects.order_by('date_added')
+    for rule in rules:
+        rule.output.state = check_output_state(rule.output.pk)
     outputs = Output.objects.order_by('date_added')
     for output in outputs:
         output.state = check_output_state(output.pk)
