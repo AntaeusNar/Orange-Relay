@@ -4,6 +4,7 @@
 from django.http import HttpResponseRedirect
 from django.template.defaulttags import register
 # local imports
+from OR_web_GUI.models import Input
 from .hidden import relay_control, follow_the_rules
 # import for GPIO in real vs. test env
 try:
@@ -25,7 +26,9 @@ def state_toggle(request, whichmodel, key_id):
         relay_control(key_id)
     elif whichmodel == 'Input':
         # todo: add state changes based on inputs
-        fish
+        input = Input.objects.get(id=key_id)
+        for rule in input.rule_set.all():
+            follow_the_rules(rule.pk)
     elif whichmodel == 'Rule':
         follow_the_rules(key_id)
         """should return back to previous page"""
