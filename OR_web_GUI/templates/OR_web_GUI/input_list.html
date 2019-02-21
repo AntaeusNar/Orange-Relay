@@ -2,6 +2,7 @@
 {% regroup rules by input as input_list %}
 <ul>
     {% for input in input_list %}
+        <!-- Todo: show inputs not in this list -->
         <li>{{ input.grouper }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.grouper.id %}">Trigger Input</a></li>
             <ul>
                 {% for rule in input.list %}
@@ -16,17 +17,19 @@
                         {% else %}
                             <li>{{rule.output}}</li>
                         {% endif %}
-                    </ul>
+                        </ul>
                 {% endfor %}
             </ul>
     {% endfor %}
 </ul>
 
-<p>All Inputs</p>
-<ul>
-    {% for input in inputs %}
-        <li>{{input}}</li>
-    {% empty %}
-        <li>No Inputs Created  <a href="{% url 'OR_web_GUI:new_input' %}">Add an Input</a></li>
-    {% endfor %}
-</ul>
+
+    <p>All Inputs</p>
+
+    <ul>
+        {% for input in inputs  %}
+            <li>{{input}}</li>
+        {% empty %}
+            <li>No Inputs Created  <a href="{% url 'OR_web_GUI:new_input' %}">Add an Input</a></li>
+        {% endfor %}
+    </ul>
