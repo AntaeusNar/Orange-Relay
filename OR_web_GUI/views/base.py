@@ -37,10 +37,11 @@ def rules(request):
 
 def inputs(request):
     # Inputs index page
+    inputs = Input.objects.order_by('date_added')
     rules = Rule.objects.order_by('date_added')
     for rule in rules:
         rule.output.state = check_output_state(rule.output.pk)
-    context = {'rules': rules, 'fake': fake}
+    context = {'rules': rules, 'inputs': inputs, 'fake': fake}
     return render(request, 'OR_web_GUI/inputs.html', context)
 
 

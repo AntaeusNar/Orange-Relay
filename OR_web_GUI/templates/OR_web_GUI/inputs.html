@@ -6,6 +6,8 @@
 
 <a href="{% url 'OR_web_GUI:new_input' %}">Add a new Input</a>
 {% regroup rules by input as input_list %}
+
+<p>Inputs in Rules</p>
 <ul>
     {% for input in input_list %}
         <li>{{ input.grouper }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.grouper.id %}">Trigger Input</a></li>
@@ -28,6 +30,14 @@
     {% endfor %}
 </ul>
 
+<p>All Inputs</p>
+<ul>
+    {% for input in inputs %}
+        <li>{{input}}</li>
+    {% empty %}
+        <li>No Inputs Created</li>
+    {% endfor %}
+</ul>
 {% endblock content %}
 
 {% block javascript %}
