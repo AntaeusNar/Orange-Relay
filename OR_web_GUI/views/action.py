@@ -30,4 +30,3 @@ def state_toggle(request, whichmodel, key_id):
         follow_the_rules(key_id)
         """should return back to previous page"""
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-

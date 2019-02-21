@@ -64,3 +64,10 @@ def check_status(key_id, whichmodel):
         pass
     elif whichmodel == 'Output':
         pass
+
+
+def check_output_state(key_id):
+    # is given an output id and checks the state of the output, then returns the output object with the state
+    output = Output.objects.get(id=key_id)
+    state = GPIO.input(output.channel)
+    return state

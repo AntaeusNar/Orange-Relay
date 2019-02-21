@@ -5,26 +5,26 @@
 <p>Inputs</p>
 
 <a href="{% url 'OR_web_GUI:new_input' %}">Add a new Input</a>
-
+{% regroup rules by input as input_list %}
 <ul>
-    {% for input in inputs %}
-        <li>{{ input }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.id %}">Trigger Input</a></li>
+    {% for input in input_list %}
+        <li>{{ input.grouper }} <a href="{% url 'OR_web_GUI:state_toggle' 'Input' input.grouper.id %}">Trigger Input</a></li>
             <ul>
-                {% for rule in input.rule_set.all %}
+                {% for rule in input.list %}
                     <li>{{ rule }}</li>
                         <ul>
-                            {% if status[rule.output.pk].item %}
-                                <li><font color="green">{{ rule.output }} </font></li>
-                            {% elif not status{rule.output.pk] %}
-                                <li><font color="red">{{ rule.output }} </font></li>
-                            {% else %}
-                                <li>{{rule.output}}</li>
-                            {% endif %}
-                        </ul>
+                        {% if rule.output.state and rule.output.state != null %}
+                            <li><font color="green">{{ rule.output }} </font></li>
+                        {% elif not rule.output.state and rule.output.state != null %}
+                            <li><font color="red">{{ rule.output }} </font></li>
+                        {% elif rule.output.state == null %}
+                            <li>{{ rule.output }} State was Null</li>
+                        {% else %}
+                            <li>{{rule.output}}</li>
+                        {% endif %}
+                    </ul>
                 {% endfor %}
             </ul>
-    {% empty %}
-        <li>No inputs have been created</li>
     {% endfor %}
 </ul>
 
